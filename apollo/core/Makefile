@@ -12,6 +12,9 @@ hello.o: hello.cc serial.h
 serial.o: serial.cc serial.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
+motor_controller.o: motor_controller.cc motor_controller.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
 .PHONY: all
 
 all:
