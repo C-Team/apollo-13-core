@@ -11,7 +11,7 @@ using apollo::remote::Command;
 using apollo::remote::CommandPacket;
 using apollo::remote::PacketManager;
 
-static const string address = "";
+static const string address = "192.168.7.2";
 static const int port = 9001;
 
 int main() {
