@@ -1,10 +1,10 @@
 CC= arm-linux-gnueabi-gcc
 CXX= arm-linux-gnueabi-g++
-LDFLAGS= -lgcc -lc -lgcc -lsupc++
-CXXFLAGS= -I ../.. -std=c++11
+LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -static
+CXXFLAGS= -I ../.. -std=c++11 -mfloat-abi=soft
 
-hello: hello.o serial.o
-	$(CXX) $(CXXFLAGS) hello.o serial.o -o $@ $(LDFLAGS)
+hello: hello.o motor_controller.o serial.o
+	$(CXX) $(CXXFLAGS) hello.o motor_controller.o serial.o -o $@ $(LDFLAGS)
 
 hello.o: hello.cc serial.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@

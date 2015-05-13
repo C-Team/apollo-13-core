@@ -5,27 +5,27 @@
 #include <unistd.h>
 #include <termios.h>
 #include "apollo/core/serial.h"
+#include "apollo/core/motor_controller.h"
 
 using apollo::core::SerialPacket;
 using apollo::core::CreateChecksum;
 using apollo::core::WritePacket;
 using apollo::core::DriveForwardMotor1;
+using apollo::core::MotorController;
 
 static const char* kTTYPath = "/dev/ttyO1";
+static const uint8_t bus_address = 128;
 
 void write_shit(void) {
-  int fd = open(kTTYPath, O_WRONLY);
-
-  SerialPacket packet;
-  DriveForwardMotor1(&packet, 128, 20);
-  if (!WritePacket(fd, &packet)) {
-    printf("Writing packet failed\n");
+  MotorController controller(kTTYPath, bus_address);
+  if (!controller.Init()) {
+    printf("Starting motor controller failed.\n");
   }
+  controller.DriveForwardMixed(40);
+  controller.TurnLeftMixed(20);
   sleep(2);
-  DriveForwardMotor1(&packet, 128, 0);
-  WritePacket(fd, &packet);
-
-  close(fd);
+  controller.DriveForwardMixed(0);
+  controller.TurnLeftMixed(0);
 }
 
 int main() {
