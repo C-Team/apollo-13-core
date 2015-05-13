@@ -15,6 +15,9 @@ serial.o: serial.cc serial.h
 motor_controller.o: motor_controller.cc motor_controller.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
+wheel_controller.o: wheel_controller.cc wheel_controller.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
 .PHONY: all
 
 all:
