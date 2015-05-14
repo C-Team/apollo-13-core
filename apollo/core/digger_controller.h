@@ -17,12 +17,7 @@ class DiggerController {
   bool SetVerticalSpeed(int8_t speed);
 
  private:
-  static const std::string serial_tty_path_wheel_motor_;
-  static const std::string serial_tty_path_vertical_motor_;
-  static const uint8_t controller_address_wheel_motor_;
-  static const uint8_t controller_address_vertical_motor_;
-
-  MotorController motor_controller_wheel_motor_;
+  MotorController motor_controller_digger_motor_;
   MotorController motor_controller_vertical_motor_;
 };
 

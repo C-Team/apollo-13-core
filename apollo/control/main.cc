@@ -1,4 +1,8 @@
+#include <csignal>
+#include <cstdio>
+#include <cstdlib>
 #include "apollo/core/motor_controller.h"
+#include "apollo/core/safe_exit.h"
 #include "apollo/remote/network_packet.h"
 #include "apollo/remote/connection_manager.h"
 
@@ -39,6 +43,8 @@ bool handle_end(MotorController* controller) {
 
 int main() {
   using namespace std::placeholders;
+
+  apollo::core::SetUpSafeExit();
 
   MotorController controller(kTTYPath, bus_address);
   if (!controller.Init()) {

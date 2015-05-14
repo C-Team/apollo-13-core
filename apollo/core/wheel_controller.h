@@ -19,13 +19,8 @@ class WheelController {
   bool SetDirection(int8_t speed);
 
  private:
-  static const std::string serial_tty_path_0_;
-  static const std::string serial_tty_path_1_;
-  static const uint8_t controller_address_0_;
-  static const uint8_t controller_address_1_;
-
-  MotorController motor_controller_0_;
-  MotorController motor_controller_1_;
+  MotorController motor_controller_wheel_motor_0_;
+  MotorController motor_controller_wheel_motor_1_;
 };
 
 } // namespace core
