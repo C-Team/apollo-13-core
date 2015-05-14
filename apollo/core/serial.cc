@@ -14,6 +14,7 @@ void CreateChecksum(SerialPacket* packet) {
 
 bool WritePacket(int fd, SerialPacket* packet) {
   const size_t packet_size = sizeof(SerialPacket);
+  printf("%u, %u, %u, %u\n", packet->command, packet->address, packet->data, packet->checksum);
   return packet_size == write(fd, packet, packet_size);
 }
 
@@ -78,12 +79,27 @@ void TurnRightMixed(SerialPacket* packet, uint8_t address, uint8_t speed) {
   packet->command = 10;
   packet->data = speed;
   CreateChecksum(packet);
+  printf("Generating TurnRightMixed\n");
 }
 
 void TurnLeftMixed(SerialPacket* packet, uint8_t address, uint8_t speed) {
   packet->address = address;
   packet->command = 11;
   packet->data = speed;
+  CreateChecksum(packet);
+}
+
+void SetSpeed(SerialPacket* packet, uint8_t address, int8_t speed) {
+  packet->address = address;
+  packet->command = 12;
+  packet->data = static_cast<uint8_t>(speed + 64);
+  CreateChecksum(packet);
+}
+
+void SetDirection(SerialPacket* packet, uint8_t address, int8_t speed) {
+  packet->address = address;
+  packet->command = 13;
+  packet->data = static_cast<uint8_t>(speed + 64);
   CreateChecksum(packet);
 }
 

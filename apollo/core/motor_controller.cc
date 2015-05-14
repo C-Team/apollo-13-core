@@ -14,6 +14,10 @@ MotorController::MotorController(const std::string& serial_tty_path,
 
 bool MotorController::Init() {
   serial_fd_ = open(serial_tty_path_.c_str(), O_WRONLY);
+  BaudRate baud_rate = BaudRate::BR9600;
+  SetTTYBaudRate(serial_fd_, baud_rate);
+  core::SetBaudRate(&packet_, bus_address_, baud_rate);
+  WritePacket(serial_fd_, &packet_);
   return serial_fd_;
 }
 
@@ -71,6 +75,16 @@ bool MotorController::TurnRightMixed(uint8_t speed) {
 
 bool MotorController::TurnLeftMixed(uint8_t speed) {
   core::TurnLeftMixed(&packet_, bus_address_, speed);
+  return WritePacket(serial_fd_, &packet_);
+}
+
+bool MotorController::SetSpeed(int8_t speed) {
+  core::SetSpeed(&packet_, bus_address_, speed);
+  return WritePacket(serial_fd_, &packet_);
+}
+
+bool MotorController::SetDirection(int8_t speed) {
+  core::SetDirection(&packet_, bus_address_, speed);
   return WritePacket(serial_fd_, &packet_);
 }
 

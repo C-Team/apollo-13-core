@@ -14,13 +14,9 @@ class WheelController {
 
   bool Init();
 
-  bool DriveForward(uint8_t speed);
+  bool SetSpeed(int8_t speed);
 
-  bool DriveBackward(uint8_t speed);
-
-  bool TurnLeft(uint8_t speed);
-
-  bool TurnRight(uint8_t speed);
+  bool SetDirection(int8_t speed);
 
  private:
   static const std::string serial_tty_path_0_;

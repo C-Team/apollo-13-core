@@ -21,11 +21,20 @@ void write_shit(void) {
   if (!controller.Init()) {
     printf("Starting motor controller failed.\n");
   }
-  controller.DriveForwardMixed(40);
-  controller.TurnLeftMixed(20);
+  controller.SetSpeed(10);
+  controller.SetDirection(10);
   sleep(2);
-  controller.DriveForwardMixed(0);
-  controller.TurnLeftMixed(0);
+  controller.SetSpeed(10);
+  controller.SetDirection(-10);
+  sleep(2);
+  controller.SetSpeed(-10);
+  controller.SetDirection(-10);
+  sleep(2);
+  controller.SetSpeed(-10);
+  controller.SetDirection(10);
+  sleep(2);
+  controller.SetSpeed(0);
+  controller.SetDirection(0);
 }
 
 int main() {

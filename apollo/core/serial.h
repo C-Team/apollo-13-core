@@ -53,6 +53,10 @@ void TurnRightMixed(SerialPacket* packet, uint8_t address, uint8_t speed);
 
 void TurnLeftMixed(SerialPacket* packet, uint8_t address, uint8_t speed);
 
+void SetSpeed(SerialPacket* packet, uint8_t address, int8_t speed);
+
+void SetDirection(SerialPacket* packet, uint8_t address, int8_t speed);
+
 void SerialTimeout(SerialPacket* packet, uint8_t address, unsigned int milliseconds);
 
 void SetBaudRate(SerialPacket* packet, uint8_t address, BaudRate baud_rate);

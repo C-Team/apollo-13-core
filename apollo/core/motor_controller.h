@@ -38,6 +38,10 @@ class MotorController {
 
   bool TurnLeftMixed(uint8_t speed);
 
+  bool SetSpeed(int8_t speed);
+
+  bool SetDirection(int8_t speed);
+
   bool SerialTimeout(unsigned int milliseconds);
 
   bool SetBaudRate(BaudRate baud_rate);
