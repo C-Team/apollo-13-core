@@ -20,7 +20,10 @@ motor_controller.o: motor_controller.cc motor_controller.h
 wheel_controller.o: wheel_controller.cc wheel_controller.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-libcore.a: motor_controller.o serial.o wheel_controller.o
+digger_controller.o: digger_controller.cc digger_controller.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+libcore.a: motor_controller.o serial.o wheel_controller.o digger_controller.o
 	ar -r $@ $^
 
 .PHONY: clean
