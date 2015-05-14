@@ -6,10 +6,6 @@ using std::string;
 using apollo::core::MotorController;
 using apollo::remote::Command;
 using apollo::remote::CommandPacket;
-using apollo::remote::DriveForward;
-using apollo::remote::DriveBackward;
-using apollo::remote::TurnLeft;
-using apollo::remote::TurnRight;
 using apollo::remote::PacketManager;
 
 static const char* kTTYPath = "/dev/ttyO1";
@@ -35,22 +31,14 @@ int main() {
   CommandPacket packet;
   while (true) {
     manager.ReadPacket(&packet);
-    switch (static_cast<Command::CommandType>(packet.command)) {
-      case Command::DRIVE_FORWARD:
-        printf("Drive Forward at %d\n", packet.data_0);
-        controller.DriveForwardMixed(packet.data_0);
+    switch (static_cast<Command>(packet.command)) {
+      case Command::SET_SPEED:
+        printf("Set speed to %d\n", packet.data_0);
+        controller.SetSpeed(packet.data_0);
         break;
-      case Command::DRIVE_BACKWARD:
-        printf("Drive Backward at %d\n", packet.data_0);
-        controller.DriveBackwardMixed(packet.data_0);
-        break;
-      case Command::TURN_LEFT:
-        printf("Turning Left at %d\n", packet.data_0);
-        controller.TurnLeftMixed(packet.data_0);
-        break;
-      case Command::TURN_RIGHT:
-        printf("Turning Right at %d\n", packet.data_0);
-        controller.TurnRightMixed(packet.data_0);
+      case Command::SET_DIRECTION:
+        printf("Set direction to %d\n", packet.data_0);
+        controller.SetDirection(packet.data_0);
         break;
     }
   }

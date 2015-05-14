@@ -23,18 +23,12 @@ int main() {
   CommandPacket packet;
   while (true) {
     manager.ReadPacket(&packet);
-    switch (static_cast<Command::CommandType>(packet.command)) {
-      case Command::DRIVE_FORWARD:
-        printf("Drive Forward at %d\n", packet.data_0);
+    switch (static_cast<Command>(packet.command)) {
+      case Command::SET_SPEED:
+        printf("Set speed to %d\n", packet.data_0);
         break;
-      case Command::DRIVE_BACKWARD:
-        printf("Drive Backward at %d\n", packet.data_0);
-        break;
-      case Command::TURN_LEFT:
-        printf("Turning Left at %d\n", packet.data_0);
-        break;
-      case Command::TURN_RIGHT:
-        printf("Turning Right at %d\n", packet.data_0);
+      case Command::SET_DIRECTION:
+        printf("Set direction to %d\n", packet.data_0);
         break;
     }
   }
