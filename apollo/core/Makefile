@@ -3,8 +3,10 @@ CXX= arm-linux-gnueabi-g++
 LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -static
 CXXFLAGS= -I ../.. -std=c++11 -mfloat-abi=soft
 
+all: libcore.a hello
+
 hello: hello.o motor_controller.o serial.o
-	$(CXX) $(CXXFLAGS) hello.o motor_controller.o serial.o -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS) -L. -lcore
 
 hello.o: hello.cc serial.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
@@ -18,12 +20,10 @@ motor_controller.o: motor_controller.cc motor_controller.h
 wheel_controller.o: wheel_controller.cc wheel_controller.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-.PHONY: all
-
-all:
-	hello
+libcore.a: motor_controller.o serial.o wheel_controller.o
+	ar -r $@ $^
 
 .PHONY: clean
 
 clean:
-	rm -rf *.o hello
+	rm -rf *.o *.a hello

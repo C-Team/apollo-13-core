@@ -11,3 +11,4 @@ bazel-testlogs
 *.pyc
 
 *.o
+*.a

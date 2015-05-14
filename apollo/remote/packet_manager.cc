@@ -30,12 +30,10 @@ PacketManager::~PacketManager() {
 }
 
 bool PacketManager::Init() {
-  sockaddr_in address;
-  socklen_t sock_len = sizeof(sockaddr_in);
-  GetSockAddr(address_, port_, &address);
+  GetSockAddr(address_, port_, &address_struct_);
 
   sock_ = socket(AF_INET, SOCK_STREAM, 0);
-  if (bind(sock_, (sockaddr*) &address, sizeof(sockaddr_in)) < 0) {
+  if (bind(sock_, (sockaddr*) &address_struct_, sizeof(sockaddr_in)) < 0) {
     printf("Error binding\n");
     return false;
   }
@@ -44,9 +42,25 @@ bool PacketManager::Init() {
     return false;
   }
 
-  fd_ = accept(sock_, (sockaddr*) &address, &sock_len);
-
   return true;
+}
+
+bool PacketManager::IsConnectionValid() {
+  uint8_t check_value = 0xff;
+  return send(fd_, &check_value, 1, MSG_NOSIGNAL) >= 0;
+}
+
+bool PacketManager::Connect() {
+  if (fd_ >= 0) {
+    close(fd_);
+  }
+  socklen_t sock_len = sizeof(sockaddr_in);
+  fd_ = accept(sock_, (sockaddr*) &address_struct_, &sock_len);
+  if (fd_ < 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 bool PacketManager::ReadPacket(CommandPacket* packet) {
