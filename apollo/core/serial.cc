@@ -59,6 +59,20 @@ void DriveBackwardMotor2(SerialPacket* packet, uint8_t address, uint8_t speed) {
   CreateChecksum(packet);
 }
 
+void SetSpeedMotor1(SerialPacket* packet, uint8_t address, int8_t speed) {
+  packet->address = address;
+  packet->command = 6;
+  packet->data = static_cast<uint8_t>(speed + 64);
+  CreateChecksum(packet);
+}
+
+void SetSpeedMotor2(SerialPacket* packet, uint8_t address, uint8_t speed) {
+  packet->address = address;
+  packet->command = 7;
+  packet->data = static_cast<uint8_t>(speed + 64);
+  CreateChecksum(packet);
+}
+
 void DriveForwardMixed(SerialPacket* packet, uint8_t address, uint8_t speed) {
   packet->address = address;
   packet->command = 8;

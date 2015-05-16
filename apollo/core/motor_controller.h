@@ -30,6 +30,10 @@ class MotorController {
 
   bool DriveBackwardMotor2(uint8_t speed);
 
+  bool SetSpeedMotor1(uint8_t speed);
+
+  bool SetSpeedMotor2(uint8_t speed);
+
   bool DriveForwardMixed(uint8_t speed);
 
   bool DriveBackwardMixed(uint8_t speed);
