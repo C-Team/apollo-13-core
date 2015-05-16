@@ -7,6 +7,10 @@
 namespace apollo {
 namespace core {
 
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// Motor Controlllers ///////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 // Each of the following pairs corresponds to a unique motor controller in the
 // real word. Each pair is a string specifying the path that identifies the
 // serial port on the beaglebone to which the motor controller is connected and
@@ -30,6 +34,11 @@ static const uint8_t controller_address_digger_motor_ = 128;
 // Digger wheel linear actuator.
 static const std::string serial_tty_path_vertical_motor_ = "/dev/ttyO1";
 static const uint8_t controller_address_vertical_motor_ = 128;
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Feedback Potentiometer /////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+static const std::string serial_tty_path_feedback_potentiometer_ = "/sys/devices/ocp.3/helper.16/AIN5";
 
 } // namespace core
 } // namespace apollo
