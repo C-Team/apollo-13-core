@@ -21,11 +21,11 @@ namespace core {
 
 // Wheel motor 0.
 static const std::string kSerialTTYPathWheelMotor0 = "/dev/ttyO1";
-static const uint8_t kControllerAddressWheelMotor0 = 131;
+static const uint8_t kControllerAddressWheelMotor0 = 130;
 
 // Wheel motor 1.
 static const std::string kSerialTTYPathWheelMotor1 = "/dev/ttyO1";
-static const uint8_t kControllerAddressWheelMotor1 = 130;
+static const uint8_t kControllerAddressWheelMotor1 = 129;
 
 // Digger wheel motor and linear actuator.
 static const std::string kSerialTTYPathDiggerMotor = "/dev/ttyO1";

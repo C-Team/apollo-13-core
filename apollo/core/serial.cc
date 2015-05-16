@@ -14,10 +14,7 @@ void CreateChecksum(SerialPacket* packet) {
 
 bool WritePacket(int fd, SerialPacket* packet) {
   const size_t packet_size = sizeof(SerialPacket);
-  printf("Writting packet to %d\n", fd);
-  bool result = packet_size == write(fd, packet, packet_size);
-  printf("Packet written\n");
-  return result;
+  return packet_size == write(fd, packet, packet_size);
 }
 
 void DriveForwardMotor1(SerialPacket* packet, uint8_t address, uint8_t speed) {

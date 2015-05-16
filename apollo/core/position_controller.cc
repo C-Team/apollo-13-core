@@ -7,8 +7,8 @@ namespace core {
 namespace {
 static const uint8_t kMinPosition = 0;
 static const uint8_t kMaxPosition = 16;
-static const int8_t kRaiseSpeed = 63;
-static const int8_t kLowerSpeed = -64;
+static const int8_t kRaiseSpeed = 10;
+static const int8_t kLowerSpeed = -10;
 static const int kSleepTime = 1;
 } // namespace
 
@@ -20,13 +20,16 @@ PositionController::PositionController(FeedbackPotentiometer* vertical_feedback,
     is_running_(true) {}
 
 bool PositionController::Init() {
-  position_thread_ = std::thread([this]{ this->ControlLoop(); });
+  printf("Initializing\n");
+  // PositionController* self = this;
+  // position_thread_ = std::thread([self]{ self->ControlLoop(); });
+  printf("Initialization complete\n");
   return true;
 }
 
 PositionController::~PositionController() {
   is_running_ = false;
-  position_thread_.join();
+  // position_thread_.join();
 }
 
 bool PositionController::SetVerticalPosition(uint8_t position) {
@@ -51,10 +54,12 @@ uint8_t PositionController::GetCurrentPosition() {
 }
 
 void PositionController::ControlLoop() {
+  printf("Beginning ControlLoop\n");
   while (true) {
     lock_.lock();
     cv_.wait(lock_);
     lock_.unlock();
+    printf("Waking up\n");
 
     if (is_ignored_) {
       continue;
@@ -75,6 +80,7 @@ void PositionController::LowerToPosition(uint8_t position) {
   printf("LowerToPosition, setting speed\n");
   position_setter_(kLowerSpeed);
   while (position > GetCurrentPosition()) {
+    printf("position: %d > current_position: %d\n", position, GetCurrentPosition());
     if (is_ignored_) {
       return;
     }
@@ -90,6 +96,7 @@ void PositionController::RaiseToPosition(uint8_t position) {
   printf("RaiseToPosition, setting speed\n");
   position_setter_(kRaiseSpeed);
   while (position < GetCurrentPosition()) {
+    printf("position: %d < current_position: %d\n", position, GetCurrentPosition());
     if (is_ignored_) {
       return;
     }

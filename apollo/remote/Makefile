@@ -1,6 +1,6 @@
 CC= arm-linux-gnueabi-gcc
 CXX= arm-linux-gnueabi-g++
-LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -static
+LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -pthread -static
 CXXFLAGS= -I ../.. -std=c++11 -mfloat-abi=soft
 
 all: libremote.a remote

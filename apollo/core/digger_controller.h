@@ -20,18 +20,19 @@ class DiggerController {
 
   bool Init();
 
-  bool SetSpeed(int8_t speed);
+  bool SetWheelSpeed(int8_t speed);
 
-  bool SetDirection(int8_t speed);
+  bool SetVerticalSpeed(int8_t speed);
 
+  bool SetVerticalPosition(uint8_t position);
 
  private:
-  // FeedbackPotentiometer vertical_feedback_;
+  FeedbackPotentiometer vertical_feedback_;
   MotorController motor_controller_digger_motor_;
-  // PositionController position_controller_;
+  PositionController position_controller_;
   
-  // bool SetWheelSpeedInternal(int8_t speed);
-  // bool SetVerticalSpeedInternal(int8_t speed);
+  bool SetWheelSpeedInternal(int8_t speed);
+  bool SetVerticalSpeedInternal(int8_t speed);
 };
 
 } // namespace core
