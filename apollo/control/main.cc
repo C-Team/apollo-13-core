@@ -16,7 +16,7 @@ using apollo::core::DiggerController;
 
 static const char* kTTYPath = "/dev/ttyO1";
 static const uint8_t bus_address = 128;
-static const string address = "192.168.7.2";
+static const string address = "192.168.0.103";
 static const int port = 9001;
 
 struct RobotController {
