@@ -30,5 +30,13 @@ bool DiggerController::SetVerticalPosition(uint8_t position) {
   return position_controller_.SetVerticalPosition(position);
 }
 
+bool DiggerController::SetWheelSpeedInternal(int8_t speed) {
+  return motor_controller_digger_motor_.SetSpeedMotor1(speed);
+}
+
+bool DiggerController::SetVerticalSpeedInternal(int8_t speed) {
+  return motor_controller_digger_motor_.SetSpeedMotor2(speed);
+}
+
 } // namespace core
 } // namespace apollo

@@ -58,12 +58,12 @@ bool MotorController::DriveBackwardMotor2(uint8_t speed) {
   return WritePacket(serial_fd_, &packet_);
 }
 
-bool MotorController::SetSpeedMotor1(uint8_t speed) {
+bool MotorController::SetSpeedMotor1(int8_t speed) {
   core::SetSpeedMotor1(&packet_, bus_address_, speed);
   return WritePacket(serial_fd_, &packet_);
 }
 
-bool MotorController::SetSpeedMotor2(uint8_t speed) {
+bool MotorController::SetSpeedMotor2(int8_t speed) {
   core::SetSpeedMotor2(&packet_, bus_address_, speed);
   return WritePacket(serial_fd_, &packet_);
 }
