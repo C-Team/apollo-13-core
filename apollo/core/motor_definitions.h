@@ -20,25 +20,27 @@ namespace core {
 // in the SafeExit() function defined in safe_exit.h.
 
 // Wheel motor 0.
-static const std::string serial_tty_path_wheel_motor_0_ = "/dev/ttyO1";
-static const uint8_t controller_address_wheel_motor_0_ = 128;
+static const std::string kSerialTTYPathWheelMotor0 = "/dev/ttyO1";
+static const uint8_t kControllerAddressWheelMotor0 = 128;
 
 // Wheel motor 1.
-static const std::string serial_tty_path_wheel_motor_1_ = "/dev/ttyO1";
-static const uint8_t controller_address_wheel_motor_1_ = 128;
+static const std::string kSerialTTYPathWheelMotor1 = "/dev/ttyO1";
+static const uint8_t kControllerAddressWheelMotor1 = 128;
 
 // Digger wheel motor.
-static const std::string serial_tty_path_digger_motor_ = "/dev/ttyO1";
-static const uint8_t controller_address_digger_motor_ = 128;
+static const std::string kSerialTTYPathDiggerMotor = "/dev/ttyO1";
+static const uint8_t kControllerAddressDiggerMotor = 128;
 
 // Digger wheel linear actuator.
-static const std::string serial_tty_path_vertical_motor_ = "/dev/ttyO1";
-static const uint8_t controller_address_vertical_motor_ = 128;
+static const std::string kSerialTTYPathConveyorMotor = "/dev/ttyO1";
+static const uint8_t kControllerAddressConveyorMotor = 128;
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// Feedback Potentiometer /////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-static const std::string serial_tty_path_feedback_potentiometer_ = "/sys/devices/ocp.3/helper.16/AIN5";
+
+// NOTE: Not a serial TTY like the above paths.
+static const std::string kFeedbackPotentiometerFile = "/sys/devices/ocp.3/helper.16/AIN5";
 
 } // namespace core
 } // namespace apollo

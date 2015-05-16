@@ -6,10 +6,10 @@ namespace apollo {
 namespace core {
 
 WheelController::WheelController() : 
-    motor_controller_wheel_motor_0_(serial_tty_path_wheel_motor_0_,
-                                    controller_address_wheel_motor_0_), 
-    motor_controller_wheel_motor_1_(serial_tty_path_wheel_motor_1_, 
-                                    controller_address_wheel_motor_1_) {}
+    motor_controller_wheel_motor_0_(kSerialTTYPathWheelMotor0,
+                                    kControllerAddressWheelMotor0), 
+    motor_controller_wheel_motor_1_(kSerialTTYPathWheelMotor1, 
+                                    kControllerAddressWheelMotor1) {}
 
 bool WheelController::Init() {
   return motor_controller_wheel_motor_0_.Init() && 

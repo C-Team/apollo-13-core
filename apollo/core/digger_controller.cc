@@ -13,8 +13,8 @@ static const int8_t kLowerSpeed = -64;
 } // namespace
 
 DiggerController::DiggerController() :
-    motor_controller_digger_motor_(serial_tty_path_digger_motor_, 
-                                  controller_address_digger_motor_), 
+    motor_controller_digger_motor_(kSerialTTYPathDiggerMotor, 
+                                   kControllerAddressDiggerMotor), 
     is_running_(true) {}
 
 bool DiggerController::Init() {

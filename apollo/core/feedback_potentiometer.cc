@@ -16,7 +16,7 @@ static const int kMinValue = 0;
 static const int kMaxValue = 16;
 
 bool FeedbackPotentiometer::Init() {
-  fd_ = open(serial_tty_path_feedback_potentiometer_.c_str(), O_RDONLY);
+  fd_ = open(kFeedbackPotentiometerFile.c_str(), O_RDONLY);
   return fd_ >= 0;
 }
 

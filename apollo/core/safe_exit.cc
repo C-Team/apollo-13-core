@@ -10,10 +10,10 @@ namespace apollo {
 namespace core {
 
 void SafeExit() {
-  KillMotor(serial_tty_path_wheel_motor_0_, controller_address_wheel_motor_0_);
-  KillMotor(serial_tty_path_wheel_motor_1_, controller_address_wheel_motor_1_);
-  KillMotor(serial_tty_path_digger_motor_, controller_address_digger_motor_);
-  KillMotor(serial_tty_path_vertical_motor_, controller_address_vertical_motor_);
+  KillMotor(kSerialTTYPathWheelMotor0, kControllerAddressWheelMotor0);
+  KillMotor(kSerialTTYPathWheelMotor1, kControllerAddressWheelMotor1);
+  KillMotor(kSerialTTYPathDiggerMotor, kControllerAddressDiggerMotor);
+  KillMotor(kSerialTTYPathConveyorMotor, kControllerAddressConveyorMotor);
 }
 
 void KillMotor(const std::string& serial_tty_path, uint8_t bus_address) {

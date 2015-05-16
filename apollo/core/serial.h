@@ -45,9 +45,9 @@ void DriveForwardMotor2(SerialPacket* packet, uint8_t address, uint8_t speed);
 
 void DriveBackwardMotor2(SerialPacket* packet, uint8_t address, uint8_t speed);
 
-void SetSpeedMotor1(SerialPacket* packet, uint8_t address, uint8_t speed);
+void SetSpeedMotor1(SerialPacket* packet, uint8_t address, int8_t speed);
 
-void SetSpeedMotor2(SerialPacket* packet, uint8_t address, uint8_t speed);
+void SetSpeedMotor2(SerialPacket* packet, uint8_t address, int8_t speed);
 
 void DriveForwardMixed(SerialPacket* packet, uint8_t address, uint8_t speed);
 
