@@ -6,37 +6,32 @@
 namespace apollo {
 namespace core {
 
-DiggerController::DiggerController() :
+DiggerController::DiggerController() : 
     motor_controller_digger_motor_(kSerialTTYPathDiggerMotor, 
-                                   kControllerAddressDiggerMotor),
-    position_controller_(
-        &vertical_feedback_, 
-        [this](uint8_t speed) { return this->SetVerticalSpeedInternal(speed); }) {}
+                                   kControllerAddressDiggerMotor) {}
 
 bool DiggerController::Init() {
   return motor_controller_digger_motor_.Init();
 }
 
-bool DiggerController::SetWheelSpeed(int8_t speed) {
-  return SetWheelSpeedInternal(speed);
+bool DiggerController::SetSpeed(int8_t speed) {
+  printf("About to set speed to %d\n", speed);
+  return motor_controller_digger_motor_.SetSpeed(speed);
 }
 
-bool DiggerController::SetVerticalSpeed(int8_t speed) {
-  position_controller_.SetIgnore();
-  return SetVerticalSpeedInternal(speed);
+bool DiggerController::SetDirection(int8_t speed) {
+  return motor_controller_digger_motor_.SetDirection(speed);
 }
 
-bool DiggerController::SetVerticalPosition(uint8_t position) {
-  return position_controller_.SetVerticalPosition(position);
-}
-
-bool DiggerController::SetWheelSpeedInternal(int8_t speed) {
-  return motor_controller_digger_motor_.SetSpeedMotor1(speed);
-}
-
-bool DiggerController::SetVerticalSpeedInternal(int8_t speed) {
-  return motor_controller_digger_motor_.SetSpeedMotor2(speed);
-}
+// bool DiggerController::SetWheelSpeedInternal(int8_t speed) {
+//   printf("Setting wheel speed to: %d\n", speed);
+//   return motor_controller_digger_motor_.SetSpeed(speed);
+// }
+// 
+// bool DiggerController::SetVerticalSpeedInternal(int8_t speed) {
+//   printf("Setting vertical speed to: %d\n", speed);
+//   return motor_controller_digger_motor_.SetSpeed(speed);
+// }
 
 } // namespace core
 } // namespace apollo

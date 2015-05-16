@@ -26,7 +26,7 @@ int do_shit() {
     printf("Starting motor controller failed.\n");
     return -1;
   }
-  controller.SetVerticalPosition(2);
+  // controller.SetVerticalPosition(2);
   while (true) {}
   return 0;
 }

@@ -9,7 +9,10 @@
 namespace apollo {
 namespace core {
 
+int sockfd;
+
 void SafeExit() {
+  close(sockfd);
   KillMotor(kSerialTTYPathWheelMotor0, kControllerAddressWheelMotor0);
   KillMotor(kSerialTTYPathWheelMotor1, kControllerAddressWheelMotor1);
   KillMotor(kSerialTTYPathDiggerMotor, kControllerAddressDiggerMotor);

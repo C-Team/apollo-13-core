@@ -9,6 +9,8 @@ namespace core {
 
 void KillMotor(const std::string& serial_tty_path, uint8_t bus_address);
 
+extern int sockfd;
+
 // Sets up the program for safe termination.
 void SetUpSafeExit();
 

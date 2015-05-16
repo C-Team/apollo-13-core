@@ -14,6 +14,7 @@ MotorController::MotorController(const std::string& serial_tty_path,
 
 bool MotorController::Init() {
   serial_fd_ = open(serial_tty_path_.c_str(), O_WRONLY);
+  printf("File descriptor = %d\n", serial_fd_);
   BaudRate baud_rate = BaudRate::BR9600;
   SetTTYBaudRate(serial_fd_, baud_rate);
   core::SetBaudRate(&packet_, bus_address_, baud_rate);
@@ -90,6 +91,7 @@ bool MotorController::TurnLeftMixed(uint8_t speed) {
 
 bool MotorController::SetSpeed(int8_t speed) {
   core::SetSpeed(&packet_, bus_address_, speed);
+  printf("About to write packet %d\n", speed);
   return WritePacket(serial_fd_, &packet_);
 }
 

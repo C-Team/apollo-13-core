@@ -31,8 +31,8 @@ bool noop() {
 bool handle_error(RobotController* controller) {
   return controller->wheel_controller.SetSpeed(0) 
       && controller->wheel_controller.SetDirection(0)
-      && controller->digger_controller.SetWheelSpeed(0)
-      && controller->digger_controller.SetVerticalSpeed(0);
+      && controller->digger_controller.SetSpeed(0)
+      && controller->digger_controller.SetSpeed(0);
 }
 
 bool handle_packet(RobotController* controller, CommandPacket* packet) {
@@ -45,13 +45,13 @@ bool handle_packet(RobotController* controller, CommandPacket* packet) {
       return controller->wheel_controller.SetDirection(packet->data_0);
     case Command::SET_DIGGER_WHEEL_SPEED:
       printf("Set digger wheel speed to %d\n", packet->data_0);
-      return controller->digger_controller.SetWheelSpeed(packet->data_0);
+      return controller->digger_controller.SetSpeed(packet->data_0);
     case Command::SET_DIGGER_VERTICAL_SPEED:
       printf("Set digger vertical speed to %d\n", packet->data_0);
-      return controller->digger_controller.SetVerticalSpeed(packet->data_0);
+      return controller->digger_controller.SetSpeed(packet->data_0);
     case Command::SET_DIGGER_VERTICAL_POSITION:
       printf("Set digger vertical position to %d\n", packet->data_0);
-      return controller->digger_controller.SetVerticalPosition(packet->data_0);
+      return controller->digger_controller.SetDirection(packet->data_0);
   }
   return false;
 }
@@ -59,8 +59,8 @@ bool handle_packet(RobotController* controller, CommandPacket* packet) {
 bool handle_end(RobotController* controller) {
   return controller->wheel_controller.SetSpeed(0) 
       && controller->wheel_controller.SetDirection(0)
-      && controller->digger_controller.SetWheelSpeed(0)
-      && controller->digger_controller.SetVerticalSpeed(0);
+      && controller->digger_controller.SetSpeed(0)
+      && controller->digger_controller.SetSpeed(0);
 }
 
 int main() {
@@ -69,12 +69,16 @@ int main() {
   apollo::core::SetUpSafeExit();
 
   RobotController controller;
-  if (!controller.wheel_controller.Init() && !controller.digger_controller.Init()) {
+  if (!controller.wheel_controller.Init() || !controller.digger_controller.Init()) {
     printf("Encountered serial error.\n");
     return -1;
   }
   controller.wheel_controller.SetSpeed(0);
   controller.wheel_controller.SetDirection(0);
+  controller.digger_controller.SetSpeed(0);
+  controller.digger_controller.SetSpeed(0);
+  controller.digger_controller.SetDirection(0);
+  controller.digger_controller.SetDirection(0);
 
   ConnectionManager connection_manager(address, port);
   connection_manager.set_on_start(&noop);

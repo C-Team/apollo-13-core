@@ -62,14 +62,17 @@ void PositionController::ControlLoop() {
 
     int current_desired = desired_position_;
     if (current_desired > GetCurrentPosition()) {
+      printf("LowerToPosition = %d\n", current_desired);
       LowerToPosition(current_desired);
     } else if (current_desired < GetCurrentPosition()) {
+      printf("RaiseToPosition = %d\n", current_desired);
       RaiseToPosition(current_desired);
     }
   }
 }
 
 void PositionController::LowerToPosition(uint8_t position) {
+  printf("LowerToPosition, setting speed\n");
   position_setter_(kLowerSpeed);
   while (position > GetCurrentPosition()) {
     if (is_ignored_) {
@@ -84,6 +87,7 @@ void PositionController::LowerToPosition(uint8_t position) {
 }
 
 void PositionController::RaiseToPosition(uint8_t position) {
+  printf("RaiseToPosition, setting speed\n");
   position_setter_(kRaiseSpeed);
   while (position < GetCurrentPosition()) {
     if (is_ignored_) {

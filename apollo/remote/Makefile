@@ -18,7 +18,7 @@ connection_manager.o: connection_manager.cc connection_manager.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 libremote.a: packet_manager.o connection_manager.o
-	ar -r $@ packet_manager.o connection_manager.o
+	ar -r $@ $^
 
 .PHONY: clean
 

@@ -56,6 +56,7 @@ bool PacketManager::Connect() {
   }
   socklen_t sock_len = sizeof(sockaddr_in);
   fd_ = accept(sock_, (sockaddr*) &address_struct_, &sock_len);
+  printf("Accepted connection.\n");
   if (fd_ < 0) {
     return false;
   } else {
@@ -64,7 +65,10 @@ bool PacketManager::Connect() {
 }
 
 bool PacketManager::ReadPacket(CommandPacket* packet) {
-  return read(fd_, packet, sizeof(CommandPacket)) == sizeof(CommandPacket);
+  printf("About to read\n");
+  int result = read(fd_, packet, sizeof(CommandPacket));
+  printf("Packet read, size = %d\n", result);
+  return result == sizeof(CommandPacket);
 }
 
 } // namespace remote
