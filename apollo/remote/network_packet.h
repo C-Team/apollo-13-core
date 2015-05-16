@@ -15,6 +15,9 @@ struct CommandPacket {
 enum class Command {
   SET_SPEED = 0,
   SET_DIRECTION = 1,
+  SET_DIGGER_WHEEL_SPEED = 2,
+  SET_DIGGER_VERTICAL_SPEED = 3,
+  SET_DIGGER_VERTICAL_POSITION = 4,
 };
 
 } // namespace remote
