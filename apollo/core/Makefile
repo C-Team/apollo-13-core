@@ -23,13 +23,16 @@ feedback_potentiometer.o: feedback_potentiometer.cc feedback_potentiometer.h
 wheel_controller.o: wheel_controller.cc wheel_controller.h motor_definitions.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-digger_controller.o: digger_controller.cc digger_controller.h motor_definitions.h
+digger_controller.o: digger_controller.cc digger_controller.h motor_definitions.h position_controller.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 safe_exit.o: safe_exit.cc safe_exit.h motor_definitions.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-libcore.a: motor_controller.o serial.o wheel_controller.o digger_controller.o safe_exit.o feedback_potentiometer.o
+position_controller.o: position_controller.cc position_controller.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+libcore.a: motor_controller.o serial.o wheel_controller.o digger_controller.o safe_exit.o feedback_potentiometer.o position_controller.o
 	ar -r $@ $^
 
 .PHONY: clean

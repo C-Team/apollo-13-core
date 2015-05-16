@@ -27,11 +27,11 @@ static const uint8_t kControllerAddressWheelMotor0 = 128;
 static const std::string kSerialTTYPathWheelMotor1 = "/dev/ttyO1";
 static const uint8_t kControllerAddressWheelMotor1 = 128;
 
-// Digger wheel motor.
+// Digger wheel motor and linear actuator.
 static const std::string kSerialTTYPathDiggerMotor = "/dev/ttyO1";
 static const uint8_t kControllerAddressDiggerMotor = 128;
 
-// Digger wheel linear actuator.
+// Conveyor motors controller.
 static const std::string kSerialTTYPathConveyorMotor = "/dev/ttyO1";
 static const uint8_t kControllerAddressConveyorMotor = 128;
 
