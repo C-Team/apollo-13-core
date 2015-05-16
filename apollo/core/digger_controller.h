@@ -27,14 +27,15 @@ class DiggerController {
   FeedbackPotentiometer vertical_feedback_;
   MotorController motor_controller_digger_motor_;
   
+  bool SetWheelSpeedInternal(int8_t speed);
+  bool SetVerticalSpeedInternal(int8_t speed);
+  uint8_t GetCurrentPosition();
+
   std::thread position_thread_;
   std::atomic<bool> is_running_;
   uint8_t desired_position_ = 0;
   std::condition_variable_any cv_;
   std::mutex lock_;
-
-  bool SetWheelSpeedInternal(int8_t speed);
-  bool SetVerticalSpeedInternal(int8_t speed);
 
   void ControlLoop();
 

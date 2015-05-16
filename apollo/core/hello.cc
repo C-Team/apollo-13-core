@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <termios.h>
 #include "apollo/core/serial.h"
-#include "feedback_potentiometer.h"
+#include "apollo/core/digger_controller.h"
+#include "apollo/core/feedback_potentiometer.h"
 #include "apollo/core/motor_controller.h"
 
 using apollo::core::SerialPacket;
@@ -14,11 +15,23 @@ using apollo::core::WritePacket;
 using apollo::core::DriveForwardMotor1;
 using apollo::core::MotorController;
 using apollo::core::FeedbackPotentiometer;
+using apollo::core::DiggerController;
 
 static const char* kTTYPath = "/dev/ttyO1";
 static const uint8_t bus_address = 128;
 
-void write_shit(void) {
+int do_shit() {
+  DiggerController controller;
+  if (!controller.Init()) {
+    printf("Starting motor controller failed.\n");
+    return -1;
+  }
+  controller.SetVerticalPosition(2);
+  while (true) {}
+  return 0;
+}
+
+void write_shit() {
   MotorController controller(kTTYPath, bus_address);
   if (!controller.Init()) {
     printf("Starting motor controller failed.\n");
@@ -52,6 +65,5 @@ int read_shit() {
 }
 
 int main() {
-  read_shit();
-  return 0;
+  return do_shit();
 }

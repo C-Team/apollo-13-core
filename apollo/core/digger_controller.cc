@@ -5,8 +5,12 @@
 
 namespace apollo {
 namespace core {
-
-using std::unique_lock;
+namespace {
+static const uint8_t kMinPosition = 0;
+static const uint8_t kMaxPosition = 16;
+static const int8_t kRaiseSpeed = 63;
+static const int8_t kLowerSpeed = -64;
+} // namespace
 
 DiggerController::DiggerController() :
     motor_controller_digger_motor_(serial_tty_path_digger_motor_, 
@@ -28,11 +32,19 @@ bool DiggerController::SetWheelSpeed(int8_t speed) {
 }
 
 bool DiggerController::SetVerticalPosition(uint8_t position) {
+  if (position > kMaxPosition) {
+    position = kMaxPosition;
+  }
+
   lock_.lock();
   desired_position_ = position;
   cv_.notify_all();
   lock_.unlock();
-  return false;
+  return true;
+}
+
+uint8_t DiggerController::GetCurrentPosition() {
+  return vertical_feedback_.ReadCurrentValue() / 100;
 }
 
 void DiggerController::ControlLoop() {
@@ -41,25 +53,25 @@ void DiggerController::ControlLoop() {
     cv_.wait(lock_);
     lock_.unlock();
     int current_desired = desired_position_;
-    if (current_desired > vertical_feedback_.ReadCurrentValue()) {
+    if (current_desired > GetCurrentPosition()) {
       LowerToPosition(current_desired);
-    } else if (current_desired < vertical_feedback_.ReadCurrentValue()) {
+    } else if (current_desired < GetCurrentPosition()) {
       RaiseToPosition(current_desired);
     }
   }
 }
 
 void DiggerController::LowerToPosition(uint8_t position) {
-  SetVerticalSpeedInternal(-64);
-  while (position > vertical_feedback_.ReadCurrentValue()) {
+  SetVerticalSpeedInternal(kLowerSpeed);
+  while (position > GetCurrentPosition()) {
     sleep(1);
   }
   SetVerticalSpeedInternal(0);
 }
 
 void DiggerController::RaiseToPosition(uint8_t position) {
-  SetVerticalSpeedInternal(63);
-  while (position < vertical_feedback_.ReadCurrentValue()) {
+  SetVerticalSpeedInternal(kRaiseSpeed);
+  while (position < GetCurrentPosition()) {
     sleep(1);
   }
   SetVerticalSpeedInternal(0);
