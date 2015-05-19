@@ -6,6 +6,7 @@
 #include "apollo/remote/connection_manager.h"
 #include "apollo/core/wheel_controller.h"
 #include "apollo/core/digger_controller.h"
+#include "apollo/core/conveyor_controller.h"
 
 using std::string;
 using apollo::remote::Command;
@@ -13,6 +14,7 @@ using apollo::remote::CommandPacket;
 using apollo::remote::ConnectionManager;
 using apollo::core::WheelController;
 using apollo::core::DiggerController;
+using apollo::core::ConveyorController;
 
 static const char* kTTYPath = "/dev/ttyO1";
 static const uint8_t bus_address = 128;
@@ -22,6 +24,7 @@ static const int port = 9001;
 struct RobotController {
   DiggerController digger_controller;
   WheelController wheel_controller;
+  ConveyorController conveyor_controller;
 };
 
 bool noop() {
@@ -32,7 +35,9 @@ bool handle_error(RobotController* controller) {
   return controller->wheel_controller.SetSpeed(0) 
       && controller->wheel_controller.SetDirection(0)
       && controller->digger_controller.SetWheelSpeed(0)
-      && controller->digger_controller.SetVerticalSpeed(0);
+      && controller->digger_controller.SetVerticalSpeed(0)
+      && controller->conveyor_controller.TurnOffConveyor1()
+      && controller->conveyor_controller.TurnOffConveyor2();
 }
 
 bool handle_packet(RobotController* controller, CommandPacket* packet) {
@@ -52,6 +57,28 @@ bool handle_packet(RobotController* controller, CommandPacket* packet) {
     case Command::SET_DIGGER_VERTICAL_POSITION:
       printf("Set digger vertical position to %d\n", packet->data_0);
       return controller->digger_controller.SetVerticalSpeed(packet->data_0);
+    case Command::SET_CONVEYOR_1_SPEED:
+      printf("Set conveyor 1 speed to %d\n", packet->data_0);
+      return controller->conveyor_controller.SetSpeedConveyor1(packet->data_0);
+    case Command::SET_CONVEYOR_2_SPEED:
+      printf("Set conveyor 1 speed to %d\n", packet->data_0);
+      return controller->conveyor_controller.SetSpeedConveyor2(packet->data_0);
+    case Command::SET_CONVEYOR_1_STATUS:
+      if (packet->data_0 == 0) {
+        printf("Turning off conveyor 1 %d\n", packet->data_0);
+        return controller->conveyor_controller.TurnOffConveyor1();
+      } else {
+        printf("Turning on conveyor 1 %d\n", packet->data_0);
+        return controller->conveyor_controller.TurnOnConveyor1();
+      }
+    case Command::SET_CONVEYOR_2_STATUS:
+      if (packet->data_0 == 0) {
+        printf("Turning off conveyor 2 %d\n", packet->data_0);
+        return controller->conveyor_controller.TurnOffConveyor2();
+      } else {
+        printf("Turning on conveyor 2 %d\n", packet->data_0);
+        return controller->conveyor_controller.TurnOnConveyor2();
+      }
   }
   return false;
 }
@@ -60,7 +87,9 @@ bool handle_end(RobotController* controller) {
   return controller->wheel_controller.SetSpeed(0) 
       && controller->wheel_controller.SetDirection(0)
       && controller->digger_controller.SetWheelSpeed(0)
-      && controller->digger_controller.SetVerticalSpeed(0);
+      && controller->digger_controller.SetVerticalSpeed(0)
+      && controller->conveyor_controller.TurnOffConveyor1()
+      && controller->conveyor_controller.TurnOffConveyor2();
 }
 
 int main() {
