@@ -33,7 +33,7 @@ static const uint8_t kControllerAddressDiggerMotor = 128;
 
 // Conveyor motors controller.
 static const std::string kSerialTTYPathConveyorMotor = "/dev/ttyO1";
-static const uint8_t kControllerAddressConveyorMotor = 129;
+static const uint8_t kControllerAddressConveyorMotor = 131;
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// Feedback Potentiometer /////////////////////////////
