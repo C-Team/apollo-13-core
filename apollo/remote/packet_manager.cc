@@ -14,15 +14,15 @@ namespace remote {
 using std::string;
 
 namespace {
-void GetSockAddr(const string& str_address, int port, sockaddr_in* address) {
+void GetSockAddr(int port, sockaddr_in* address) {
   address->sin_family = AF_INET;
+  address->sin_addr.s_addr = htonl(INADDR_ANY);
   address->sin_port = htons(port);
-  inet_pton(AF_INET, str_address.c_str(), &address->sin_addr.s_addr);
 }
 } // namespace
 
-PacketManager::PacketManager(const string& address, int port) 
-  : address_(address), port_(port) {}
+PacketManager::PacketManager(int port) 
+  : port_(port) {}
 
 PacketManager::~PacketManager() {
   close(fd_);
@@ -30,11 +30,12 @@ PacketManager::~PacketManager() {
 }
 
 bool PacketManager::Init() {
-  GetSockAddr(address_, port_, &address_struct_);
+  GetSockAddr(port_, &address_struct_);
 
   sock_ = socket(AF_INET, SOCK_STREAM, 0);
   if (bind(sock_, (sockaddr*) &address_struct_, sizeof(sockaddr_in)) < 0) {
     printf("Error binding\n");
+    close(sock_);
     return false;
   }
   if (listen(sock_, kQueueSize) < 0) {

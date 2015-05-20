@@ -16,9 +16,6 @@ using apollo::core::WheelController;
 using apollo::core::DiggerController;
 using apollo::core::ConveyorController;
 
-static const char* kTTYPath = "/dev/ttyO1";
-static const uint8_t bus_address = 128;
-static const string address = "192.168.0.103";
 static const int port = 9001;
 
 struct RobotController {
@@ -109,7 +106,7 @@ int main() {
   controller.digger_controller.SetVerticalSpeed(0);
   controller.digger_controller.SetWheelSpeed(0);
 
-  ConnectionManager connection_manager(address, port);
+  ConnectionManager connection_manager(port);
   connection_manager.set_on_start(&noop);
   connection_manager.set_on_failure(std::bind(&handle_error, &controller));
   connection_manager.set_handler(std::bind(&handle_packet, &controller, _1));

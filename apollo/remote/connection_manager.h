@@ -11,7 +11,7 @@ namespace remote {
 
 class ConnectionManager {
  public:
-  ConnectionManager(const std::string& address, int port);
+  ConnectionManager(int port);
 
   bool Start();
 

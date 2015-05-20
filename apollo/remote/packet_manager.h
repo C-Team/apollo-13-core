@@ -10,7 +10,7 @@ namespace remote {
 
 class PacketManager {
  public:
-  PacketManager(const std::string& address, int port);
+  PacketManager(int port);
   bool Init();
   ~PacketManager();
 
@@ -22,7 +22,6 @@ class PacketManager {
 
  private:
   static const int kQueueSize = 1;
-  const std::string& address_;
   sockaddr_in address_struct_;
   int port_;
   int sock_;

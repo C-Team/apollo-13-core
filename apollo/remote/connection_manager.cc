@@ -3,8 +3,8 @@
 namespace apollo {
 namespace remote {
 
-ConnectionManager::ConnectionManager(const std::string& address, int port) 
-    : packet_manager_(address, port) {}
+ConnectionManager::ConnectionManager(int port) 
+    : packet_manager_(port) {}
 
 bool ConnectionManager::Start() {
   if (!packet_manager_.Init()) {

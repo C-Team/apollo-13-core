@@ -15,7 +15,7 @@ static const string address = "192.168.7.2";
 static const int port = 9001;
 
 int main() {
-  PacketManager manager(address, port);
+  PacketManager manager(port);
   if (!manager.Init()) {
     return -1;
   }
@@ -29,6 +29,8 @@ int main() {
         break;
       case Command::SET_DIRECTION:
         printf("Set direction to %d\n", packet.data_0);
+        break;
+      default:
         break;
     }
   }
