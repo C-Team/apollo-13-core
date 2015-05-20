@@ -6,7 +6,7 @@ namespace apollo {
 namespace core {
 namespace {
 static const int8_t kConveyorSpeed1 = 20;
-static const int8_t kConveyorSpeed2 = 20;
+static const int8_t kConveyorSpeed2 = 40;
 } // namespace
 
 ConveyorController::ConveyorController() : motor_controller_(
@@ -16,6 +16,7 @@ bool ConveyorController::Init() {
   return motor_controller_.Init();
 }
 
+// LARGE_CONVEYOR
 bool ConveyorController::SetSpeedConveyor1(int8_t speed) {
   return motor_controller_.SetSpeedMotor1(speed);
 }
@@ -28,6 +29,7 @@ bool ConveyorController::TurnOffConveyor1() {
   return SetSpeedConveyor1(0);
 }
 
+// SMALL_CONVEYOR
 bool ConveyorController::SetSpeedConveyor2(int8_t speed) {
   return motor_controller_.SetSpeedMotor2(speed);
 }

@@ -13,12 +13,14 @@ class ConveyorController {
 
   bool Init();
 
+  // LARGE_CONVEYOR
   bool SetSpeedConveyor1(int8_t speed);
 
   bool TurnOnConveyor1();
 
   bool TurnOffConveyor1();
 
+  // SMALL_CONVEYOR
   bool SetSpeedConveyor2(int8_t speed);
 
   bool TurnOnConveyor2();
