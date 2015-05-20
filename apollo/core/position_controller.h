@@ -21,6 +21,8 @@ class PositionController {
 
   ~PositionController();
 
+  int ReadCurrentValue();
+
   bool SetVerticalPosition(uint8_t position);
 
   void SetIgnore();

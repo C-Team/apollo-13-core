@@ -50,10 +50,13 @@ bool handle_packet(RobotController* controller, CommandPacket* packet) {
       return controller->digger_controller.SetWheelSpeed(packet->data_0);
     case Command::SET_DIGGER_VERTICAL_SPEED:
       printf("Set digger vertical speed to %d\n", packet->data_0);
+      if (packet->data_0 == 0) {
+      }
       return controller->digger_controller.SetVerticalSpeed(packet->data_0);
     case Command::SET_DIGGER_VERTICAL_POSITION:
-      printf("Set digger vertical position to %d\n", packet->data_0);
-      return controller->digger_controller.SetVerticalSpeed(packet->data_0);
+      // printf("Set digger vertical position to %d\n", packet->data_0);
+      printf("Current position is %d\n", controller->digger_controller.ReadCurrentValue());
+      return true; // controller->digger_controller.SetVerticalSpeed(packet->data_0);
     case Command::SET_CONVEYOR_1_SPEED:
       printf("Set conveyor 1 speed to %d\n", packet->data_0);
       return controller->conveyor_controller.SetSpeedConveyor1(packet->data_0);

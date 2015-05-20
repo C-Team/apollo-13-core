@@ -49,6 +49,10 @@ void PositionController::SetIgnore() {
   is_ignored_ = true;
 }
 
+int PositionController::ReadCurrentValue() {
+  return vertical_feedback_->ReadCurrentValue();
+}
+
 uint8_t PositionController::GetCurrentPosition() {
   return vertical_feedback_->ReadCurrentValue() / 100;
 }

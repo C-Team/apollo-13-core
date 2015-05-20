@@ -26,6 +26,8 @@ class DiggerController {
 
   bool SetVerticalPosition(uint8_t position);
 
+  int ReadCurrentValue();
+
  private:
   FeedbackPotentiometer vertical_feedback_;
   MotorController motor_controller_digger_motor_;

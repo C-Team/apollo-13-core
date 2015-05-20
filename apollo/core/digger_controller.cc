@@ -14,8 +14,9 @@ DiggerController::DiggerController() :
         [this](uint8_t speed) { return this->SetVerticalSpeedInternal(speed); }) {}
 
 bool DiggerController::Init() {
-  return motor_controller_digger_motor_.Init() &&
-      position_controller_.Init();
+  return motor_controller_digger_motor_.Init() 
+      && vertical_feedback_.Init()
+      && position_controller_.Init();
 }
 
 bool DiggerController::SetWheelSpeed(int8_t speed) {
@@ -29,6 +30,10 @@ bool DiggerController::SetVerticalSpeed(int8_t speed) {
 
 bool DiggerController::SetVerticalPosition(uint8_t position) {
   return position_controller_.SetVerticalPosition(position);
+}
+
+int DiggerController::ReadCurrentValue() {
+  return position_controller_.ReadCurrentValue();
 }
 
 bool DiggerController::SetWheelSpeedInternal(int8_t speed) {
