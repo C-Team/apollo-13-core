@@ -21,15 +21,15 @@ PositionController::PositionController(FeedbackPotentiometer* vertical_feedback,
 
 bool PositionController::Init() {
   printf("Initializing\n");
-  // PositionController* self = this;
-  // position_thread_ = std::thread([self]{ self->ControlLoop(); });
+  PositionController* self = this;
+  position_thread_ = std::thread([self]{ self->ControlLoop(); });
   printf("Initialization complete\n");
   return true;
 }
 
 PositionController::~PositionController() {
   is_running_ = false;
-  // position_thread_.join();
+  position_thread_.join();
 }
 
 bool PositionController::SetVerticalPosition(uint8_t position) {

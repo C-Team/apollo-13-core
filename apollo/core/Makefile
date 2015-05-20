@@ -1,6 +1,6 @@
 CC= arm-linux-gnueabi-gcc
 CXX= arm-linux-gnueabi-g++
-LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -pthread -static
+LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -static -pthread -Wl,--no-as-needed -Wl,--whole-archive -lpthread -Wl,--no-whole-archive
 CXXFLAGS= -I ../.. -std=c++11 -mfloat-abi=soft
 
 all: libcore.a hello
@@ -33,7 +33,7 @@ safe_exit.o: safe_exit.cc safe_exit.h motor_definitions.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 position_controller.o: position_controller.cc position_controller.h
-	$(CXX) -c $(CXXFLAGS) $< -o $@ -pthread
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 libcore.a: motor_controller.o serial.o wheel_controller.o digger_controller.o safe_exit.o feedback_potentiometer.o position_controller.o conveyor_controller.o
 	ar -r $@ $^

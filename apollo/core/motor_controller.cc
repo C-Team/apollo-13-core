@@ -19,7 +19,10 @@ bool MotorController::Init() {
   SetTTYBaudRate(serial_fd_, baud_rate);
   core::SetBaudRate(&packet_, bus_address_, baud_rate);
   WritePacket(serial_fd_, &packet_);
-  return serial_fd_;
+  if (serial_fd_ < 0) {
+    printf("Opening %s failed\n", serial_tty_path_.c_str());
+  }
+  return serial_fd_ >= 0;
 }
 
 MotorController::~MotorController() {

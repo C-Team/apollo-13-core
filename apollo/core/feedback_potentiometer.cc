@@ -17,6 +17,9 @@ static const int kMaxValue = 16;
 
 bool FeedbackPotentiometer::Init() {
   fd_ = open(kFeedbackPotentiometerFile.c_str(), O_RDONLY);
+  if (fd_ < 0) {
+    printf("Opening %s failed\n", kFeedbackPotentiometerFile.c_str());
+  }
   return fd_ >= 0;
 }
 

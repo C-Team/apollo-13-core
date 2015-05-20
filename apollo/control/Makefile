@@ -1,6 +1,6 @@
 CC= arm-linux-gnueabi-gcc
 CXX= arm-linux-gnueabi-g++
-LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -pthread -static
+LDFLAGS= -lgcc -lc -lgcc -lsupc++ -lstdc++ -static -pthread -Wl,--no-as-needed -Wl,--whole-archive -lpthread -Wl,--no-whole-archive
 CXXFLAGS= -I ../.. -std=c++11 -mfloat-abi=soft
 
 control: main.o ../core/libcore.a ../remote/libremote.a
