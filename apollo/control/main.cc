@@ -98,7 +98,9 @@ int main() {
   apollo::core::SetUpSafeExit();
 
   RobotController controller;
-  if (!controller.wheel_controller.Init() || !controller.digger_controller.Init()) {
+  if (!controller.wheel_controller.Init() 
+      || !controller.digger_controller.Init() 
+      || !controller.conveyor_controller.Init()) {
     printf("Encountered serial error.\n");
     return -1;
   }
