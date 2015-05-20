@@ -5,8 +5,8 @@
 namespace apollo {
 namespace core {
 namespace {
-static const int8_t kConveyorSpeed1 = 20;
-static const int8_t kConveyorSpeed2 = 40;
+static const int8_t kConveyorSpeed1 = -20;
+static const int8_t kConveyorSpeed2 = -40;
 } // namespace
 
 ConveyorController::ConveyorController() : motor_controller_(
