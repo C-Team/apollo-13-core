@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <unistd.h>
+#include "apollo/core/safe_exit.h"
 
 namespace apollo {
 namespace remote {
@@ -38,6 +39,7 @@ bool PacketManager::Init() {
     close(sock_);
     return false;
   }
+  core::sockfd = sock_;
   if (listen(sock_, kQueueSize) < 0) {
     printf("Error listening\n");
     return false;

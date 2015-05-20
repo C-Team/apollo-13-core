@@ -17,7 +17,7 @@ packet_manager.o: packet_manager.cc packet_manager.h network_packet.h
 connection_manager.o: connection_manager.cc connection_manager.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-libremote.a: packet_manager.o connection_manager.o
+libremote.a: packet_manager.o connection_manager.o ../core/safe_exit.o ../core/serial.o
 	ar -r $@ $^
 
 .PHONY: clean
