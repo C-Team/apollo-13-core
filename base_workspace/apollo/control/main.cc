@@ -1,12 +1,12 @@
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
-#include "apollo/core/safe_exit.h"
-#include "apollo/remote/network_packet.h"
-#include "apollo/remote/connection_manager.h"
-#include "apollo/core/wheel_controller.h"
-#include "apollo/core/digger_controller.h"
 #include "apollo/core/conveyor_controller.h"
+#include "apollo/core/digger_controller.h"
+#include "apollo/core/safe_exit.h"
+#include "apollo/core/wheel_controller.h"
+#include "apollo/remote/connection_manager.h"
+#include "apollo/remote/network_packet.h"
 
 using std::string;
 using apollo::remote::Command;
